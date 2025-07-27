@@ -34,11 +34,11 @@ func main() {
 	}
 
 	srv := &http.Server{
-		Addr:    ":3000",
+		Addr:    fmt.Sprintf(":%s", os.Getenv("APP_PORT")),
 		Handler: app.routes(),
 	}
 
-	fmt.Println("Server Working...")
+	fmt.Printf("Starting server on port %s...\n", os.Getenv("APP_PORT"))
 	err := srv.ListenAndServe()
 	log.Fatalln(err)
 }
