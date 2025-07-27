@@ -6,6 +6,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: deploy-vars
 
     env:
       BRANCH_NAME: ${{ github.ref_name }} 
