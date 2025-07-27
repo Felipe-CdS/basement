@@ -27,6 +27,7 @@ jobs:
           git pull origin $BRANCH_NAME
           go mod tidy
           make build
+          systemctl stop basement-stage.service
           cp bin/main ../stage
           cp -r assets/* ../stage
 
