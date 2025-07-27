@@ -3,4 +3,3 @@ tmp/
 bin/
 .env
 assets/css/tailwind_styles.css
-views/**/**/*.go
