@@ -19,12 +19,12 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          echo "Deploying branch: $BRANCH_NAME"
+          echo "Deploying branch: ${{ env.BRANCH_NAME }}"
           
           cd /var/www/basement/code
           git fetch origin
-          git checkout $BRANCH_NAME
-          git pull origin $BRANCH_NAME
+          git checkout ${{ env.BRANCH_NAME }}
+          git pull origin ${{ env.BRANCH_NAME }}
           go mod tidy
           make build
           sudo systemctl stop basement-stage.service
