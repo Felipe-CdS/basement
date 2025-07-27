@@ -31,4 +31,6 @@ live:
 	make -j3 live/templ live/server live/sync_assets
 
 build: 
+	go run github.com/a-h/templ/cmd/templ@v0.3.819 generate
+	tailwindcss -i ./assets/css/tailwind.input.css -o ./assets/css/tailwind_styles.css --minify
 	go build -o bin/main ./cmd
