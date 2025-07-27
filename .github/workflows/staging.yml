@@ -1,0 +1,40 @@
+name: Staging
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+	
+    env:
+      BRANCH_NAME: ${{ github.ref_name }} 
+
+    steps:
+    - name: Deploy to stage
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          echo "Deploying branch: $BRANCH_NAME"
+          
+          cd /var/www/basement/code
+          git fetch origin
+          git checkout $BRANCH_NAME
+          git pull origin $BRANCH_NAME
+          go mod tidy
+          make build
+          cp bin/main ../stage
+          cp -r assets/* ../stage
+
+    - name: Restart services
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          systemctl reload nginx
+          systemctl restart basement-stage.service
