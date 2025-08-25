@@ -1,0 +1,75 @@
+package static_views
+
+import layouts_view "nugu.dev/basement/views/layouts"
+
+templ Birthdays() {
+	@layouts_view.StaticHome() {
+		<h1 class="text-3xl font-semibold text-center">
+			/ Birthdays / 
+		</h1>
+		<p class="text-center">
+			생일 축하합니다~~~
+		</p>
+		<table class="self-center mt-5 w-full border-gray-100 table-fixed">
+			<caption class="py-1 text-center text-black bg-gray-100">
+				트와이스
+			</caption>
+
+			@BirthdayLine("임나연", "1995년 09월 22일 (토)")
+			@BirthdayLine("유정연", "1996년 11월 01일 (금)")
+			@BirthdayLine("모모", "1996년 11월 09일 (토)")
+			@BirthdayLine("사나", "1996년 12월 29일 (일)")
+			@BirthdayLine("박지효", "1997년 02월 01일 (토)")
+			@BirthdayLine("미나", "1997년 03월 24일 (월)")
+			@BirthdayLine("김다현", "1998년 05월 28일 (목)")
+			@BirthdayLine("손채영", "1999년 04월 23일 (금)")
+			@BirthdayLine("조쯔위", "1999년 06월 14일 (월)")
+		</table>
+
+		<table class="self-center w-full border-gray-100 table-fixed">
+			<caption class="py-1 text-lg text-center text-black bg-gray-100">
+				에스파
+			</caption>
+
+			@BirthdayLine("카리나", "2000년 04월 11일 (화)")
+			@BirthdayLine("지젤", "2000년 10월 30일 (월)")
+			@BirthdayLine("윈터", "2001년 01월 01일 (월)")
+			@BirthdayLine("닝닝", "2002년 10월 23일 (수)")
+		</table>
+
+		<table class="self-center w-full border-gray-100 table-fixed">
+			<caption class="py-1 text-lg text-center text-black bg-gray-100">
+				뉴진스
+			</caption>
+
+			@BirthdayLine("민지", "2004년 05월 07일 (금)")
+			@BirthdayLine("하니", "2004년 10월 06일 (수)")
+			@BirthdayLine("다니엘", "2005년 04월 11일 (월)")
+			@BirthdayLine("해린", "2006년 05월 15일 (월)")
+			@BirthdayLine("혜인", "2008년 04월 21일 (월)")
+		</table>
+	}
+}
+
+templ BirthdayLine(member string, birthday string) {
+	<tr class="border border-x-0 border-b-gray-50">
+		<td class="py-0 border-none">
+			<button class="py-3 w-full truncate overflow-ellipsis">
+				{member}
+			</button>
+		</td>
+		<td class="py-0 border-none">
+			<button class="py-3 w-full truncate overflow-ellipsis">
+				{birthday}
+			</button>
+		</td>
+		<td class="hidden gap-5 justify-center py-3 border-none lg:flex" >
+			<button>
+				<img class="size-6 invert" src="/assets/img/clipboard.svg"/>
+			</button>
+			<a>
+				<img class="size-6 invert" src="/assets/img/grid.svg"/>
+			</a>
+		</td>
+	</tr>
+}

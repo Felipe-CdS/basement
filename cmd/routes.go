@@ -78,6 +78,11 @@ func (a *application) routes() *http.ServeMux {
 		component.Render(r.Context(), w)
 	})
 
+	mux.HandleFunc("/birthdays", func(w http.ResponseWriter, r *http.Request) {
+		component := static_views.Birthdays()
+		component.Render(r.Context(), w)
+	})
+
 	fs := http.FileServer(http.Dir("./assets"))
 	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
