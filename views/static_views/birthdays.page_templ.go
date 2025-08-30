@@ -8,6 +8,8 @@ package static_views
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import "fmt"
+
 import layouts_view "nugu.dev/basement/views/layouts"
 
 func Birthdays() templ.Component {
@@ -40,91 +42,91 @@ func Birthdays() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1 class=\"text-3xl font-semibold text-center\">/ Birthdays / </h1><p class=\"text-center\">생일 축하합니다~~~</p><table class=\"self-center mt-5 w-full border-gray-100 table-fixed\"><caption class=\"py-1 text-center text-black bg-gray-100\">트와이스</caption>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1 class=\"text-xl font-semibold text-center lg:text-3xl\">/ Birthdays / </h1><p class=\"text-center\" id=\"display\">생일 축하합니다~</p><table class=\"self-center mt-5 w-full border-gray-100 table-fixed lg:w-9/12\"><caption class=\"py-1 text-center text-black bg-gray-100\">트와이스</caption>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("임나연", "1995년 09월 22일 (토)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("임나연", "1995", "09", "22", "토").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("유정연", "1996년 11월 01일 (금)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("유정연", "1996", "11", "01", "금").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("모모", "1996년 11월 09일 (토)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("모모", "1996", "11", "09", "토").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("사나", "1996년 12월 29일 (일)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("사나", "1996", "12", "29", "일").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("박지효", "1997년 02월 01일 (토)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("박지효", "1997", "02", "01", "토").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("미나", "1997년 03월 24일 (월)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("미나", "1997", "03", "24", "월").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("김다현", "1998년 05월 28일 (목)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("김다현", "1998", "05", "28", "목").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("손채영", "1999년 04월 23일 (금)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("손채영", "1999", "04", "23", "금").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("조쯔위", "1999년 06월 14일 (월)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("쯔위", "1999", "06", "14", "월").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</table><table class=\"self-center w-full border-gray-100 table-fixed\"><caption class=\"py-1 text-lg text-center text-black bg-gray-100\">에스파</caption>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</table><table class=\"self-center w-full border-gray-100 table-fixed lg:w-9/12\"><caption class=\"py-1 text-lg text-center text-black bg-gray-100\">에스파</caption>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("카리나", "2000년 04월 11일 (화)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("카리나", "2000", "04", "11", "화").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("지젤", "2000년 10월 30일 (월)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("지젤", "2000", "10", "30", "월").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("윈터", "2001년 01월 01일 (월)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("윈터", "2001", "01", "01", "월").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("닝닝", "2002년 10월 23일 (수)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("닝닝", "2002", "10", "23", "수").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</table><table class=\"self-center w-full border-gray-100 table-fixed\"><caption class=\"py-1 text-lg text-center text-black bg-gray-100\">뉴진스</caption>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</table><table class=\"self-center w-full border-gray-100 table-fixed md:w-9/12\"><caption class=\"py-1 text-lg text-center text-black bg-gray-100\">뉴진스</caption>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("민지", "2004년 05월 07일 (금)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("민지", "2004", "05", "07", "금").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("하니", "2004년 10월 06일 (수)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("하니", "2004", "10", "06", "수").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("다니엘", "2005년 04월 11일 (월)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("다니엘", "2005", "04", "11", "월").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("해린", "2006년 05월 15일 (월)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("해린", "2006", "05", "15", "월").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = BirthdayLine("혜인", "2008년 04월 21일 (월)").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = BirthdayLine("혜인", "2008", "04", "21", "월").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</table>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</table><script type=\"text/javascript\" src=\"/assets/js/clipboard.js\"></script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -138,7 +140,7 @@ func Birthdays() templ.Component {
 	})
 }
 
-func BirthdayLine(member string, birthday string) templ.Component {
+func BirthdayLine(member string, y, m, d, wd string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -156,33 +158,85 @@ func BirthdayLine(member string, birthday string) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr class=\"border border-x-0 border-b-gray-50\"><td class=\"py-0 border-none\"><button class=\"py-3 w-full truncate overflow-ellipsis\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr class=\"border border-x-0 border-b-gray-50 has-[:active]:bg-gray-300\"><td class=\"py-0 border-none\"><button data-name=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(member)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/static_views/birthdays.page.templ`, Line: 58, Col: 11}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/static_views/birthdays.page.templ`, Line: 62, Col: 21}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button></td><td class=\"py-0 border-none\"><button class=\"py-3 w-full truncate overflow-ellipsis\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" data-value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(birthday)
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%s%s%s", m, d, y))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/static_views/birthdays.page.templ`, Line: 63, Col: 13}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/static_views/birthdays.page.templ`, Line: 63, Col: 46}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button></td><td class=\"hidden gap-5 justify-center py-3 border-none lg:flex\"><button><img class=\"size-6 invert\" src=\"/assets/img/clipboard.svg\"></button> <a><img class=\"size-6 invert\" src=\"/assets/img/grid.svg\"></a></td></tr>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" onclick=\"copyToClipboard(this);\" class=\"py-3 w-full truncate overflow-ellipsis\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(member)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/static_views/birthdays.page.templ`, Line: 67, Col: 11}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button></td><td class=\"py-0 border-none\"><button data-name=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var7 string
+		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(member)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/static_views/birthdays.page.templ`, Line: 72, Col: 21}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" data-value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var8 string
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%s%s%s", m, d, y))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/static_views/birthdays.page.templ`, Line: 73, Col: 46}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" onclick=\"copyToClipboard(this);\" class=\"py-3 w-full truncate overflow-ellipsis\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var9 string
+		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%s년 %s월 %s일 (%s)", y, m, d, wd))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/static_views/birthdays.page.templ`, Line: 77, Col: 55}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button></td></tr>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
