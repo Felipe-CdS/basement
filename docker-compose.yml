@@ -1,8 +1,45 @@
 services:
+  templ:
+    profiles: [hot]
+    container_name: templ-container
+    image: ghcr.io/a-h/templ:v0.3.960
+    working_dir: /app
+    volumes:
+      - "${PWD}:/app"
+    command: ["generate", "--watch"]
+
+  tailwind:
+    profiles: [hot]
+    container_name: tailwind-container
+    build:
+      context: .
+      target: tailwind-watch
+    volumes:
+      - "${PWD}:/app"
+    tty: true
+    command: ["tailwindcss", "-i", "./assets/css/tailwind_input.css", "-o", "./assets/css/tailwind_styles.css", "--watch", "--poll"]
+
   hot:
+    profiles: [hot]
+    container_name: basement-container
     image: cosmtrek/air
     working_dir: /app
     ports:
-      - 3000:3000
+      - 3001:3000
     volumes:
       - "${PWD}:/app"
+    depends_on:
+      templ:
+        condition: service_started
+      tailwind:
+        condition: service_started
+
+  tailwind-minify:
+    profiles: [build]
+    container_name: tailwind-minify-container
+    build:
+      context: .
+      target: tailwind-watch
+    volumes:
+      - "${PWD}:/app"
+    command: ["tailwindcss", "-i", "./assets/css/tailwind_input.css", "-o", "./assets/css/tailwind_styles.css", "--minify"]
