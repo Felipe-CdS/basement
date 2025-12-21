@@ -30,7 +30,35 @@ live/sync_assets:
 live: 
 	make -j3 live/templ live/server live/sync_assets
 
-build: 
+build_deprecated:
 	go run github.com/a-h/templ/cmd/templ@v0.3.819 generate
 	tailwindcss -i ./assets/css/tailwind.input.css -o ./assets/css/tailwind_styles.css --minify
 	go build -o bin/main ./cmd
+
+.PHONY: docker-build-mac
+docker-build-mac:
+	docker build \
+	--build-arg BUILD_GOOS=darwin \
+	-t basement:$(shell git rev-parse --short HEAD) \
+	--target prod-build .
+
+.PHONY: docker-build-aws
+docker-build-aws:
+	docker build \
+	--build-arg BUILD_GOOS=linux \
+	-t basement:aws \
+	-t basement:$(shell git rev-parse --short HEAD) \
+	--target prod-build .
+
+.PHONY: docker-push-image
+docker-push-image:
+	docker image tag basement:aws coutito/basement:aws
+	docker push coutito/basement:aws
+
+.PHONY: docker-dev
+docker-dev:
+	docker build -t basement:dev --target dev-hot .
+	docker stop basement > /dev/null 2>&1 || true
+	docker rm basement   > /dev/null 2>&1 || true
+	docker run -d -p 5432:8000 --name basement -v ${PWD}:/app basement:dev
+	

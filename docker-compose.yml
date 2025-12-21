@@ -1,0 +1,8 @@
+services:
+  hot:
+    image: cosmtrek/air
+    working_dir: /app
+    ports:
+      - 3000:3000
+    volumes:
+      - "${PWD}:/app"
