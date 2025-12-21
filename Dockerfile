@@ -44,27 +44,3 @@ COPY --from=prod-build /app/tmp/basement .
 COPY --from=prod-build /app/config.yaml .
 
 ENTRYPOINT ["/app/basement"]
-
-# =============================================================================
-# HOT-BUILD
-
-FROM fetch-stage AS hot-build
-
-RUN go install github.com/air-verse/air@v1.61.1
-
-WORKDIR /app
-
-CMD ["air", "-c", ".air.toml"]
-
-# =============================================================================
-# TAILWIND-WATCH
-FROM debian:bookworm-slim AS tailwind-watch
-
-ENV TAILWIND_URL="https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.18/tailwindcss-linux-arm64"
-
-WORKDIR /app
-
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl watchman && rm -rf /var/lib/apt/lists/*
-
-RUN curl -L -o /usr/local/bin/tailwindcss ${TAILWIND_URL}
-RUN chmod +x /usr/local/bin/tailwindcss

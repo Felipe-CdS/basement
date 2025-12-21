@@ -20,8 +20,6 @@ docker-push-image: docker-build-aws
 
 .PHONY: docker-dev
 docker-dev:
-	docker build -t basement:dev --target hot-build .
-	docker compose --profile hot down -v
 	docker compose --profile hot up -d
 	docker logs -f basement-container
 	

@@ -11,13 +11,19 @@ services:
   tailwind:
     profiles: [hot]
     container_name: tailwind-container
-    build:
-      context: .
-      target: tailwind-watch
+    image: coutito/tailwindcss:v4.1.18
     volumes:
       - "${PWD}:/app"
     tty: true
     command: ["tailwindcss", "-i", "./assets/css/tailwind_input.css", "-o", "./assets/css/tailwind_styles.css", "--watch", "--poll"]
+
+  tailwind-minify:
+    profiles: [build]
+    container_name: tailwind-minify-container
+    image: coutito/tailwindcss:v4.1.18
+    volumes:
+      - "${PWD}:/app"
+    command: ["tailwindcss", "-i", "./assets/css/tailwind_input.css", "-o", "./assets/css/tailwind_styles.css", "--minify"]
 
   hot:
     profiles: [hot]
@@ -33,13 +39,3 @@ services:
         condition: service_started
       tailwind:
         condition: service_started
-
-  tailwind-minify:
-    profiles: [build]
-    container_name: tailwind-minify-container
-    build:
-      context: .
-      target: tailwind-watch
-    volumes:
-      - "${PWD}:/app"
-    command: ["tailwindcss", "-i", "./assets/css/tailwind_input.css", "-o", "./assets/css/tailwind_styles.css", "--minify"]
