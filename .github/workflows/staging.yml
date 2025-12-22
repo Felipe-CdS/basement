@@ -9,9 +9,13 @@ jobs:
     environment: deploy-vars
 
     env:
-      BRANCH_NAME: ${{ github.ref_name }} 
+      BRANCH_NAME: ${{ github.ref_name }}
 
     steps:
+    - uses: actions/checkout@v6
+    - name: Add SHORT_SHA env property
+      run: echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
+
     - name: Deploy to stage
       uses: appleboy/ssh-action@master
       with:
@@ -20,23 +24,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           echo "Deploying branch: ${{ env.BRANCH_NAME }}"
-          
-          cd /var/www/basement/code
-          git fetch origin
-          git checkout ${{ env.BRANCH_NAME }}
-          git pull origin ${{ env.BRANCH_NAME }}
-          go mod tidy
-          make build
-          sudo systemctl stop basement-stage.service
-          cp bin/main ../stage
-          cp -r assets/* ../stage
+          echo "Deploying commit: ${{ env.SHORT_SHA }}"
 
-    - name: Restart services
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          sudo systemctl restart basement-stage.service
-          sudo systemctl reload nginx
+          docker pull coutito/basement-aws:${{ env.SHORT_SHA }}
+          docker run -d -p 3001:5432 coutito/basement-aws:${{ env.SHORT_SHA }}

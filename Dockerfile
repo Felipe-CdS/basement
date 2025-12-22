@@ -32,7 +32,7 @@ COPY . .
 
 RUN GOOS=${BUILD_GOOS} GOARCH=arm64 go build -mod=mod -ldflags "-w -s" -o ./tmp/basement ./cmd/
 
-FROM alpine:3.23 AS dev-static-runtime
+FROM alpine:3.23 AS prod-final-bin
 LABEL org.opencontainers.image.source=https://nugu.dev/basement
 
 WORKDIR /app
@@ -41,6 +41,5 @@ RUN apk --no-cache add ca-certificates
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 COPY --from=prod-build /app/tmp/basement .
-COPY --from=prod-build /app/config.yaml .
 
 ENTRYPOINT ["/app/basement"]
