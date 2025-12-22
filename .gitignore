@@ -3,3 +3,4 @@ tmp/
 bin/
 .env
 assets/css/tailwind_styles.css
+.DS_store
