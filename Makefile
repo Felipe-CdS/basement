@@ -1,3 +1,5 @@
+-include Makefile.vars
+
 .PHONY: docker-build-mac
 docker-build-mac:
 	docker compose --profile build up
@@ -26,8 +28,14 @@ docker-push-image: docker-build-aws
 docker-dev:
 	docker compose --profile hot up -d
 
-
 .PHONY: run-act
 run-act:
-	act -s REMOTE_HOST=56.125.128.202 -s REMOTE_USER=rapi -s SSH_PRIVATE_KEY="$(shell cat ~/.ssh/gureum-key.pem)" -P ubuntu-latest=catthehacker/ubuntu:act-latest
+	@if [ -z "$$AWS_PROFILE" ]; then \
+	  echo "AWS_PROFILE is undefined"; exit 1; \
+	fi
 
+	act \
+	  -s REMOTE_HOST="$(REMOTE_HOST)" \
+	  -s REMOTE_USER="$(REMOTE_USER)" \
+	  -s SSH_PRIVATE_KEY="$(PEM_KEY)" \
+	  -P ubuntu-latest=catthehacker/ubuntu:act-latest
