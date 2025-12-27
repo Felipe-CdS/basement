@@ -47,4 +47,5 @@ jobs:
           docker run -d \
             --name prod_basement \
             -p 3001:5432 \
+            -e ENV=prod  \
             coutito/basement-aws:prod-${{ env.SHORT_SHA }}

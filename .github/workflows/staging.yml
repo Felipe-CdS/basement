@@ -46,4 +46,5 @@ jobs:
           docker run -d \
             --name stage_basement \
             -p 3002:5432 \
+            -e ENV=stage  \
             coutito/basement-aws:staging-${{ env.SHORT_SHA }}

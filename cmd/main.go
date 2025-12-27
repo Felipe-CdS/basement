@@ -1,13 +1,16 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/ssm"
 	"github.com/joho/godotenv"
+
 	"nugu.dev/basement/pkg/models/postgres"
 )
 
@@ -34,31 +37,62 @@ func main() {
 	}
 
 	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%s", os.Getenv("APP_PORT")),
+		Addr:    "5432",
 		Handler: app.routes(),
 	}
 
-	fmt.Printf("Starting server on port %s...\n", os.Getenv("APP_PORT"))
+	fmt.Printf("Starting server...\n")
 	err := srv.ListenAndServe()
 	log.Fatalln(err)
 }
 
 func setEnvVars() {
 	env := os.Getenv("ENV")
-	envPath, _ := os.Getwd()
 
-	// In production the binary is controlled by systemd, so the path is "/".
-	// In this case we need to get the executable path and set the service
-	// environment to start as "ENV=PROD ./main".
+	ctx := context.Background()
+	cfg, err := config.LoadDefaultConfig(ctx)
 
-	if env == "PROD" {
-		envPath, _ = os.Executable()
-		envPath = filepath.Dir(envPath)
+	if err != nil {
+		log.Fatalf("unable to load SDK config, %v", err)
 	}
 
-	if err := godotenv.Load(filepath.Join(envPath, ".env")); err != nil {
-		log.Fatalln("No .env file found. Path:", envPath)
-	} else {
-		log.Println("Environment variables found. Path:", envPath)
+	envContent := ""
+
+	switch env {
+	case "local":
+		envContent = "/basement/config/local"
+	case "stage":
+		envContent = "/basement/config/stage"
+	case "prod":
+		envContent = "/basement/config/prod"
+	}
+
+	if envContent == "" {
+		log.Fatalln("No env declared. Check docker env vars.")
+	}
+
+	ssmClient := ssm.NewFromConfig(cfg)
+
+	// TODO: use new() when go 1.26 releases
+	boolHolder := true
+	input := &ssm.GetParameterInput{
+		Name:           &envContent,
+		WithDecryption: &boolHolder,
+	}
+
+	result, err := ssmClient.GetParameter(ctx, input)
+	if err != nil {
+		log.Fatalln("No .env found. Check SSM")
+	}
+
+	envMap, err := godotenv.Unmarshal(*result.Parameter.Value)
+	if err != nil {
+		log.Fatalf("Failed to load env vars. Err: %v", err)
+	}
+
+	log.Println("Environment variables found. | ENV:", env)
+
+	for key, value := range envMap {
+		os.Setenv(key, value)
 	}
 }

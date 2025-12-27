@@ -39,19 +39,23 @@ services:
     profiles: [hot]
     container_name: basement-container
     image: cosmtrek/air
+    environment:
+      ENV: local
+      AWS_PROFILE: ${AWS_PROFILE}
     working_dir: /app
     ports:
       - 3001:3000
     volumes:
       - "${PWD}:/app"
+      - "~/.aws:/root/.aws:ro"
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: 128M
+          cpus: '1'
+          memory: 1G
         reservations:
-          cpus: '0.5'
-          memory: 128M
+          cpus: '1'
+          memory: 1G
     depends_on:
       templ:
         condition: service_started
