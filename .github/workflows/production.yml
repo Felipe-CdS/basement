@@ -48,4 +48,5 @@ jobs:
             --name prod_basement \
             -p 3001:5432 \
             -e ENV=prod  \
+            -e AWS_REGION=sa-east-1 \
             coutito/basement-aws:prod-${{ env.SHORT_SHA }}

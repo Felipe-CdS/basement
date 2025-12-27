@@ -82,7 +82,7 @@ func setEnvVars() {
 
 	result, err := ssmClient.GetParameter(ctx, input)
 	if err != nil {
-		log.Fatalln("No .env found. Check SSM")
+		log.Fatalf("No .env found. Check SSM | Err: %v", err)
 	}
 
 	envMap, err := godotenv.Unmarshal(*result.Parameter.Value)
