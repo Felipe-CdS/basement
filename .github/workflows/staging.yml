@@ -1,4 +1,4 @@
-name: Staging
+name: Deploy (staging)
 
 on:
   workflow_dispatch:
@@ -6,7 +6,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: aws-deploy
+    environment:
+      name: staging
+      url: https://staging.basement.nugu.dev
 
     steps:
     - name: Checkout
