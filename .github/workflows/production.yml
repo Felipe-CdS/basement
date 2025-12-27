@@ -1,7 +1,8 @@
-name: Staging
+name: Production
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [master]
 
 jobs:
   deploy:
@@ -24,23 +25,23 @@ jobs:
     - name: Build + push image to dockerhub
       run: |
         docker build \
-          --tag coutito/basement-aws:staging-${{ env.SHORT_SHA }} \
+          --tag coutito/basement-aws:prod-${{ env.SHORT_SHA }} \
           --target prod-final-bin .
 
-        docker push coutito/basement-aws:staging-${{ env.SHORT_SHA }}
+        docker push coutito/basement-aws:prod-${{ env.SHORT_SHA }}
 
-    - name: Deploy on staging server
+    - name: Deploy on production server
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          docker pull coutito/basement-aws:staging-${{ env.SHORT_SHA }}
+          docker pull coutito/basement-aws:prod-${{ env.SHORT_SHA }}
 
-          docker rm -f stage_basement || true
+          docker rm -f prod_basement || true
 
           docker run -d \
-            --name stage_basement \
-            -p 3002:5432 \
-            coutito/basement-aws:staging-${{ env.SHORT_SHA }}
+            --name prod_basement \
+            -p 3001:5432 \
+            coutito/basement-aws:prod-${{ env.SHORT_SHA }}

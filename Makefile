@@ -34,11 +34,14 @@ run-act:
 
 	act \
 		-s DOCKERHUB_TOKEN="$(DOCKERHUB_TOKEN)" \
-		-P ubuntu-latest=catthehacker/ubuntu:act-latest
+		-P ubuntu-latest=catthehacker/ubuntu:act-latest \
 		-W .github/workflows/push-master-image.yml
 
 	act \
 		-s REMOTE_HOST="$(REMOTE_HOST)" \
 		-s REMOTE_USER="$(REMOTE_USER)" \
 		-s SSH_PRIVATE_KEY="$(PEM_KEY)" \
-		-P ubuntu-latest=catthehacker/ubuntu:act-latest
+		-s DOCKERHUB_TOKEN="$(DOCKERHUB_TOKEN)" \
+		-P ubuntu-latest=catthehacker/ubuntu:act-latest \
+		-W .github/workflows/staging.yml \
+		workflow_dispatch
