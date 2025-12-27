@@ -26,7 +26,8 @@ jobs:
 
     - name: Build + push image to dockerhub
       run: |
-        docker build \
+        docker buildx build \
+          --platform linux/arm64 \
           --tag coutito/basement-aws:prod-${{ env.SHORT_SHA }} \
           --target prod-final-bin .
 
