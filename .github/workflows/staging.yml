@@ -33,6 +33,7 @@ jobs:
       run: |
         docker buildx build \
           --platform linux/arm64 \
+          --build-arg BUILD_GOOS=linux \
           --tag coutito/basement-aws:staging-${{ env.SHORT_SHA }} \
           --target prod-final-bin .
 
