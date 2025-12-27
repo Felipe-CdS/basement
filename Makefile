@@ -4,7 +4,6 @@
 docker-build-mac:
 	docker compose --profile build up
 	docker rm tailwind-minify-container
-	docker rmi coutito/tailwindcss:v4.1.18
 	docker build \
 	--build-arg BUILD_GOOS=darwin \
 	-t coutito/basement-mac:$(shell git rev-parse --short HEAD) \
@@ -14,7 +13,6 @@ docker-build-mac:
 docker-build-aws:
 	docker compose --profile build up
 	docker rm tailwind-minify-container
-	docker rmi coutito/tailwindcss:v4.1.18
 	docker build \
 	--build-arg BUILD_GOOS=linux \
 	-t coutito/basement-aws:$(shell git rev-parse --short HEAD) \

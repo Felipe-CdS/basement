@@ -27,4 +27,5 @@ jobs:
           echo "Deploying commit: ${{ env.SHORT_SHA }}"
 
           docker pull coutito/basement-aws:${{ env.SHORT_SHA }}
-          docker run -d -p 3001:5432 coutito/basement-aws:${{ env.SHORT_SHA }}
+          docker rm stage_basement
+          docker run --name stage_basement -p 3002:5432 -d coutito/basement-aws:${{ env.SHORT_SHA }}
