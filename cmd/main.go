@@ -37,7 +37,7 @@ func main() {
 	}
 
 	srv := &http.Server{
-		Addr:    "5432",
+		Addr:    "3000",
 		Handler: app.routes(),
 	}
 
