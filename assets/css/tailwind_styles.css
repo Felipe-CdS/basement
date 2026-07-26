@@ -3,8 +3,7 @@
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
-    --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
+    --font-sans: "Inconsolata", sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace;
     --color-red-500: oklch(63.7% 0.237 25.331);
@@ -47,6 +46,7 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --font-kr: "Noto Serif KR", sans-serif;
   }
 }
 @layer base {
@@ -611,6 +611,9 @@
   .indent-10 {
     text-indent: calc(var(--spacing) * 10);
   }
+  .font-kr {
+    font-family: var(--font-kr);
+  }
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -795,6 +798,14 @@
       width: calc(8/12 * 100%);
     }
   }
+}
+@font-face {
+  font-family: "Inconsolata";
+  src: url('/assets/fonts/Inconsolata.ttf') format('truetype');
+}
+@font-face {
+  font-family: "Noto Serif KR";
+  src: url('/assets/fonts/NotoSerifKR.ttf') format('truetype');
 }
 @property --tw-rotate-x {
   syntax: "*";

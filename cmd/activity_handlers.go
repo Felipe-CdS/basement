@@ -143,6 +143,7 @@ func (app *application) GetDailyLog(w http.ResponseWriter, r *http.Request) {
 
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			fmt.Println(err)
 			return
 		}
 
@@ -179,7 +180,9 @@ func (app *application) GetDailyLog(w http.ResponseWriter, r *http.Request) {
 			calendarLog = append(calendarLog, x)
 		}
 
-		calendarStats.DailyAverage = (calendarStats.DailyAverage / len(calendarHolder)) / 3600
+		if len(calendarHolder) > 0 {
+			calendarStats.DailyAverage = (calendarStats.DailyAverage / len(calendarHolder)) / 3600
+		}
 	}
 
 	page := activity_views.Log(calendarLog, partialLog, calendarStats, loggedUser)

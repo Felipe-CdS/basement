@@ -56,8 +56,15 @@ services:
         reservations:
           cpus: '1'
           memory: 1G
+    networks:
+      - emporium_network
     depends_on:
       templ:
         condition: service_started
       tailwind:
         condition: service_started
+
+networks:
+  emporium_network:     
+    external: true         
+    name: emporium_stg_network

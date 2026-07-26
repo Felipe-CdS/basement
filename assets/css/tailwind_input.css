@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@font-face {
+	font-family: "Inconsolata";
+	src: url('/assets/fonts/Inconsolata.ttf') format('truetype');
+}
+@font-face {
+	font-family: "Noto Serif KR";
+	src: url('/assets/fonts/NotoSerifKR.ttf') format('truetype');
+}
+
+@theme {
+  --font-sans: "Inconsolata", sans-serif;
+  --font-kr: "Noto Serif KR", sans-serif;
+}
+

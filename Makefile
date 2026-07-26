@@ -24,10 +24,6 @@ docker-push-image: docker-build-aws
 
 .PHONY: docker-dev
 docker-dev:
-	@if [ -z "$$AWS_PROFILE" ]; then \
-	  echo "AWS_PROFILE is undefined"; exit 1; \
-	fi
-
 	docker compose --profile hot up -d
 
 .PHONY: run-act
