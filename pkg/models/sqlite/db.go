@@ -33,7 +33,7 @@ func (dbStore *Store) getConnection() error {
 	ctx := context.Background()
 
 	syncDb, _ := turso.NewTursoSyncDb(ctx, turso.TursoSyncDbConfig{
-		Path:      "app.db",
+		Path:      "pkg/models/sqlite/turso/app.db",
 		RemoteUrl: os.Getenv("TURSO_DATABASE_URL"),
 		AuthToken: os.Getenv("TURSO_AUTH_TOKEN"),
 	})
