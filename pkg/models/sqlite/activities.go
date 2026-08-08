@@ -2,6 +2,7 @@ package sqlite
 
 import (
 	"database/sql"
+	"fmt"
 	"time"
 
 	"nugu.dev/basement/pkg/models"
@@ -51,18 +52,20 @@ func (a *ActivityRepository) GetIntervalLog(start time.Time, end time.Time, sele
 		stmt = `SELECT start_time, FLOOR(SUM(unixepoch(v1.end_time) - unixepoch(v1.start_time)))
 			FROM (
 				SELECT *
-				FROM ((activities
-					JOIN activities_tags ON fk_activity_id = activities.id)
-					JOIN tags ON fk_tag_id = tags.id)
+				FROM activities
+					JOIN activities_tags ON fk_activity_id = activities.id
+					JOIN tags ON fk_tag_id = tags.id
 				WHERE activities.start_time >= $1
-				AND activities.end_time < $2
-				AND activities.end_time IS NOT NULL
-				AND tags.name LIKE $3
+					AND activities.end_time < $2
+					AND activities.end_time IS NOT NULL
+					AND tags.name LIKE $3
 			) v1
 			GROUP BY start_time
 			ORDER BY start_time ASC;`
 
 		rows, err = a.Db.Query(stmt, start.Format(time.DateOnly), end.Format(time.DateOnly), selectedTag)
+
+		fmt.Println(err)
 
 	} else {
 		stmt = `SELECT start_time, FLOOR(SUM(activities.end_time - activities.start_time))

@@ -2,8 +2,8 @@ package static_views
 
 import layouts_view "nugu.dev/basement/views/layouts"
 
-templ Reads() {
-	@layouts_view.StaticHome() {
+templ Reads(loggedUser bool) {
+	@layouts_view.StaticHome(loggedUser) {
 		<h1 class="text-3xl font-semibold">
 			Papers / Articles / Books
 		</h1>
@@ -16,50 +16,35 @@ templ Reads() {
 		<ul class="mt-5 w-full list-inside">
 			<li>
 				<span>
-					<a
-						class="underline"
-						href="https://efrei.poupa.net/programmation%20en%20c/cours/the_c_puzzle_book.pdf"
-					>
+					<a class="underline" href="https://efrei.poupa.net/programmation%20en%20c/cours/the_c_puzzle_book.pdf">
 						The C puzzle book
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					<a
-						class="underline"
-						href="https://www.cis.upenn.edu/~cis5150/linalg-I-f.pdf"
-					>
+					<a class="underline" href="https://www.cis.upenn.edu/~cis5150/linalg-I-f.pdf">
 						Algebra for Computer Vision, Robotics, and Machine Learning
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					<a
-						class="underline"
-						href="https://jeffe.cs.illinois.edu/teaching/algorithms/"
-					>
+					<a class="underline" href="https://jeffe.cs.illinois.edu/teaching/algorithms/">
 						Algorithms
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					<a
-						class="underline"
-						href="https://siboehm.com/articles/22/Fast-MMM-on-CPU"
-					>
+					<a class="underline" href="https://siboehm.com/articles/22/Fast-MMM-on-CPU">
 						Multidimensional Matrix Multiplication on CPU from Scratch
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					<a
-						class="underline"
-						href="https://people.freebsd.org/~lstewart/articles/cpumemory.pdf"
-					>
+					<a class="underline" href="https://people.freebsd.org/~lstewart/articles/cpumemory.pdf">
 						What every programmer should know about memory
 					</a>
 				</span>
@@ -76,10 +61,7 @@ templ Reads() {
 			</li>
 			<li>
 				<span>
-					<a
-						class="underline"
-						href="https://raytracing.github.io/"
-					>
+					<a class="underline" href="https://raytracing.github.io/">
 						Ray tracing in one week
 					</a>
 				</span>

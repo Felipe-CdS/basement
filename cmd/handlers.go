@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -43,7 +45,7 @@ func (app *application) Landing(w http.ResponseWriter, r *http.Request) {
 	// 	log.Fatalln(err)
 	// }
 
-	component := layouts_view.StaticHome()
+	component := layouts_view.StaticHome(app.isLoggedUser(r))
 	component.Render(r.Context(), w)
 }
 
@@ -81,4 +83,20 @@ func (app *application) Login(w http.ResponseWriter, r *http.Request) {
 		component.Render(r.Context(), w)
 		return
 	}
+}
+
+func (app *application) GetAuthTokens(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" || !app.isLoggedUser(r) {
+		http.Error(w, fmt.Errorf("Wrong method or unauthorized").Error(), http.StatusNotFound)
+		return
+	}
+
+	dat, err := os.ReadFile("tokens")
+	if err != nil {
+		http.Error(w, fmt.Errorf("Broken tokens file").Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write(dat)
+	return
 }

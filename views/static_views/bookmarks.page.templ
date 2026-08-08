@@ -2,8 +2,8 @@ package static_views
 
 import layouts_view "nugu.dev/basement/views/layouts"
 
-templ Bookmarks() {
-	@layouts_view.StaticHome() {
+templ Bookmarks(loggedUser bool) {
+	@layouts_view.StaticHome(loggedUser) {
 		<h1 id="videos" class="text-3xl font-semibold">
 			Bookmarks
 		</h1>
@@ -18,7 +18,7 @@ templ Bookmarks() {
 		</h2>
 		<ul class="w-full list-inside">
 			<li>
-				[ ] 
+				[ ]
 				<a
 					class="underline"
 					href="https://www.youtube.com/watch?v=z56jmr9z34q
@@ -28,7 +28,7 @@ templ Bookmarks() {
 				</a>
 			</li>
 			<li>
-				[ ] 
+				[ ]
 				<a
 					class="underline"
 					href="https://www.youtube.com/watch?v=HaBMAD-Dr8M
@@ -51,98 +51,71 @@ templ Bookmarks() {
 		</h2>
 		<ul class="w-full list-inside">
 			<li>
-				[ ] 
-				<a
-					class="underline"
-					href="https://deno.com/blog/http-imports"
-				>
+				[ ]
+				<a class="underline" href="https://deno.com/blog/http-imports">
 					What we got wrong about HTTP imports
 				</a>
 			</li>
 			<li>
 				<span>
-					[ ] 
-					<a
-						class="underline"
-						href="https://anishathalye.com/managing-your-dotfiles/"
-					>
+					[ ]
+					<a class="underline" href="https://anishathalye.com/managing-your-dotfiles/">
 						Managing your dotfiles
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					[ ] 
-					<a
-						class="underline"
-						href="https://thesquareplanet.com/blog/eisenhower-vectors/"
-					>
+					[ ]
+					<a class="underline" href="https://thesquareplanet.com/blog/eisenhower-vectors/">
 						Eisenhower Vectors
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					[ ] 
-					<a
-						class="underline"
-						href="https://thesquareplanet.com/blog/how-the-internet-works/"
-					>
+					[ ]
+					<a class="underline" href="https://thesquareplanet.com/blog/how-the-internet-works/">
 						How the internet works
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					[ ] 
-					<a
-						class="line-through"
-						href="https://ismailefe.org/blog/why_use_emacs/"
-					>
+					[ ]
+					<a class="line-through" href="https://ismailefe.org/blog/why_use_emacs/">
 						Why use emacs
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					[ ] 
-					<a
-						class="underline"
-						href="https://blog.teamtreehouse.com/go-interfaces-awesome"
-					>
+					[ ]
+					<a class="underline" href="https://blog.teamtreehouse.com/go-interfaces-awesome">
 						Go Interfaces are awesome
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					[ ] 
-					<a
-						class="underline"
-						href="https://benhoyt.com/writings/how-to-apply/"
-					>
+					[ ]
+					<a class="underline" href="https://benhoyt.com/writings/how-to-apply/">
 						How (not) to apply for a software job
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					[ ] 
-					<a
-						class="underline"
-						href="https://benhoyt.com/writings/go-routing/"
-					>
+					[ ]
+					<a class="underline" href="https://benhoyt.com/writings/go-routing/">
 						Different approaches to HTTP routing in Go
 					</a>
 				</span>
 			</li>
 			<li>
 				<span>
-					[ ] 
-					<a
-						class="underline"
-						href="https://www.0x65.dev/blog/2019-12-06/building-a-search-engine-from-scratch.html"
-					>
+					[ ]
+					<a class="underline" href="https://www.0x65.dev/blog/2019-12-06/building-a-search-engine-from-scratch.html">
 						Building a search engine from scratch
 					</a>
 				</span>
