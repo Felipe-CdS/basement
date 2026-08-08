@@ -8,7 +8,7 @@ import (
 )
 
 templ Log(calendarLog []models.ActivityDayOverview, partialLog templ.Component, stats models.StatsOverview, loggedUser bool) {
-	@layouts_view.StaticHome() {
+	@layouts_view.StaticHome(loggedUser) {
 		<h1 class="text-3xl font-semibold text-center">
 			/ Habits Log / 
 		</h1>

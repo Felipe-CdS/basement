@@ -3,13 +3,14 @@ package main
 import (
 	"net/http"
 
+	secrets_view "nugu.dev/basement/views/secrets"
 	"nugu.dev/basement/views/static_views"
 )
 
 func (a *application) routes() *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", a.Landing)
+	mux.HandleFunc("/{$}", a.Landing)
 
 	mux.HandleFunc("/activities", func(w http.ResponseWriter, r *http.Request) {
 
@@ -46,11 +47,6 @@ func (a *application) routes() *http.ServeMux {
 		http.Redirect(w, r, redirectURL, http.StatusFound)
 	})
 
-	mux.HandleFunc("/reads", func(w http.ResponseWriter, r *http.Request) {
-		component := static_views.Reads()
-		component.Render(r.Context(), w)
-	})
-
 	mux.HandleFunc("/log/create", func(w http.ResponseWriter, r *http.Request) {
 
 		if err := a.AuthMiddleware(w, r); err != nil {
@@ -73,8 +69,27 @@ func (a *application) routes() *http.ServeMux {
 		a.EditDailyLog(w, r)
 	})
 
+	mux.HandleFunc("/auth-token", func(w http.ResponseWriter, r *http.Request) {
+		a.GetAuthTokens(w, r)
+	})
+
+	mux.HandleFunc("/reads", func(w http.ResponseWriter, r *http.Request) {
+		component := static_views.Reads(a.isLoggedUser(r))
+		component.Render(r.Context(), w)
+	})
+
 	mux.HandleFunc("/bookmarks", func(w http.ResponseWriter, r *http.Request) {
-		component := static_views.Bookmarks()
+		component := static_views.Bookmarks(a.isLoggedUser(r))
+		component.Render(r.Context(), w)
+	})
+
+	mux.HandleFunc("/birthdays", func(w http.ResponseWriter, r *http.Request) {
+		component := static_views.Birthdays(a.isLoggedUser(r))
+		component.Render(r.Context(), w)
+	})
+
+	mux.HandleFunc("/secrets", func(w http.ResponseWriter, r *http.Request) {
+		component := secrets_view.Secrets(a.isLoggedUser(r))
 		component.Render(r.Context(), w)
 	})
 
@@ -82,4 +97,15 @@ func (a *application) routes() *http.ServeMux {
 	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	return mux
+}
+
+func (a *application) isLoggedUser(r *http.Request) bool {
+	loggedUser := true
+	authToken, err := r.Cookie("t")
+
+	if err != nil || authToken.Value != a.AuthToken {
+		loggedUser = false
+	}
+
+	return loggedUser
 }

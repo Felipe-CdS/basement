@@ -4,3 +4,5 @@ bin/
 .env
 assets/css/tailwind_styles.css
 .DS_store
+*.db*
+*_templ.go

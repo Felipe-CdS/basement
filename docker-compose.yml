@@ -2,7 +2,7 @@ services:
   templ:
     profiles: [hot]
     container_name: templ-container
-    image: ghcr.io/a-h/templ:v0.3.960
+    image: ghcr.io/a-h/templ:v0.3.1020
     working_dir: /app
     volumes:
       - "${PWD}:/app"
@@ -16,7 +16,7 @@ services:
   tailwind:
     profiles: [hot]
     container_name: tailwind-container
-    image: coutito/tailwindcss:v4.1.18
+    image: coutito/tailwindcss:v4.3.3
     volumes:
       - "${PWD}:/app"
     tty: true
@@ -27,27 +27,15 @@ services:
           cpus: '0.1'
           memory: 64M
 
-  tailwind-minify:
-    profiles: [build]
-    container_name: tailwind-minify-container
-    image: coutito/tailwindcss:v4.1.18
-    volumes:
-      - "${PWD}:/app"
-    command: ["tailwindcss", "-i", "./assets/css/tailwind_input.css", "-o", "./assets/css/tailwind_styles.css", "--minify"]
-
   hot:
     profiles: [hot]
     container_name: basement-container
     image: cosmtrek/air
-    environment:
-      ENV: local
-      AWS_PROFILE: ${AWS_PROFILE}
     working_dir: /app
     ports:
-      - 3001:3000
+      - 3000:3000
     volumes:
       - "${PWD}:/app"
-      - "~/.aws:/root/.aws:ro"
     deploy:
       resources:
         limits:
