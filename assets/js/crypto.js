@@ -34,16 +34,14 @@ async function decodeTokenSecrets(encryptedEntry, masterPassword) {
 	);
 
 	try {
-
 		const arrayBufferResult = await window.crypto.subtle.decrypt(
 			{ name: "AES-GCM", iv: Uint8Array.fromHex(entryParts.iv) }, 
 			key, 
 			Uint8Array.fromHex(entryParts.data),
 		);
 
-		return JSON.parse(decoder.decode(arrayBufferResult))
+		return decoder.decode(arrayBufferResult)
 	} catch(e){
-		console.log("decrypt fail")
-		return {}
+		throw new Error("decrypt fail")
 	}
 }

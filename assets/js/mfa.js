@@ -102,28 +102,37 @@ async function getAuth(secretKey) {
 }
 
 async function fillTokens(){
-	const master = document.getElementById("master-input").value;
-
-	if(!master){
-		return
-	}
-
-	const encryptedEntry = event.detail.xhr.response.trim()
-
 	const items = document.querySelectorAll('.token-label');
-	const tokenSecrets = await decodeTokenSecrets(encryptedEntry, master);
+	const master = document.getElementById("master-input").value;
+	const tokenSecrets = []
+
+	if(!master) return;
+
+	try {
+		const encryptedEntry = event.detail.xhr.response.trim()
+		const decryptedEntry = await decodeTokenSecrets(encryptedEntry, master);
+		const entryLines = decryptedEntry.split("\n")
+
+		for(let i = 0; i < entryLines.length; i++){
+			if(entryLines[i] == "") continue;
+
+			var lineSplit = entryLines[i].split(":")
+			tokenSecrets[lineSplit[0]] = lineSplit[1]
+		}
+	} catch(e) {
+		console.log(e.message)
+	}
 
 	for(let i = 0; i < items.length; i++){
 		let item = items[i]
+		item.innerHTML = "xxx xxx"
+
 		let result = await getAuth(tokenSecrets[item.id])
 
 		if(result != ""){
 			item.innerHTML = `${result.slice(0,3)} ${result.slice(3,6)}`
-			continue
 		} 
-			item.innerHTML = "xxx xxx"
 	};
-
 }
 
 

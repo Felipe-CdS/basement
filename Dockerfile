@@ -49,6 +49,7 @@ WORKDIR /app
 RUN mkdir /assets
 COPY --from=tailwind-generate-stage /app/assets ./assets/
 COPY --from=build-stage /app/tmp/basement .
+COPY --from=build-stage /app/tokens .
 
 # TURSO NEEDS: libgcc gcompat
 RUN apk --no-cache add ca-certificates libgcc gcompat
