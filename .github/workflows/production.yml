@@ -3,13 +3,13 @@ name: Deploy (production)
 on:
   push:
     branches: [master]
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: https://basement.nugu.dev
 
     steps:
     - name: Checkout
@@ -26,27 +26,27 @@ jobs:
 
     - name: Build + push image to dockerhub
       run: |
-        docker build \
-          --build-arg BUILD_GOOS=linux \
-          --tag coutito/basement-aws:prod-${{ env.SHORT_SHA }} \
-          --target prod-final-bin .
+        docker buildx build \
+        --push \
+        --no-cache \
+        --platform linux/amd64,linux/arm64 \
+        -t coutito/basement:${{ env.SHORT_SHA }} .
 
-        docker push coutito/basement-aws:prod-${{ env.SHORT_SHA }}
-
-    - name: Deploy on production server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          docker pull coutito/basement-aws:prod-${{ env.SHORT_SHA }}
-
-          docker rm -f prod_basement || true
-
-          docker run -d \
-            --name prod_basement \
-            -p 3001:3000 \
-            -e ENV=prod  \
-            -e AWS_REGION=sa-east-1 \
-            coutito/basement-aws:prod-${{ env.SHORT_SHA }}
+    # Disabled for now
+    # - name: Deploy on production server
+    #   uses: appleboy/ssh-action@master
+    #   with:
+    #     host: ${{ secrets.REMOTE_HOST }}
+    #     username: ${{ secrets.REMOTE_USER }}
+    #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+    #     script: |
+    #       docker pull coutito/basement:${{ env.SHORT_SHA }}
+    #
+    #       docker rm -f basement || true
+    #
+    #       docker run -d \
+    #         --name basement \
+    #         --platform linux/amd64 \
+    #         -p 8080:3000 \
+    #         -v .env:/app/.env \
+    #         coutito/basement:${{ env.SHORT_SHA }}
