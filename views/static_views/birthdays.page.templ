@@ -4,9 +4,9 @@ import "fmt"
 
 import layouts_view "nugu.dev/basement/views/layouts"
 
-templ Birthdays(loggedUser bool) {
-	@layouts_view.StaticHome(loggedUser) {
-		if !loggedUser {
+templ Birthdays(homeData layouts_view.StaticHomeData) {
+	@layouts_view.StaticHome(homeData) {
+		if !homeData.LoggedUser {
 			@layouts_view.Unauthorized()
 		} else {
 			<h1 class="text-xl font-semibold text-center lg:text-3xl">

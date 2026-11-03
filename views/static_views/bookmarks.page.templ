@@ -2,8 +2,8 @@ package static_views
 
 import layouts_view "nugu.dev/basement/views/layouts"
 
-templ Bookmarks(loggedUser bool) {
-	@layouts_view.StaticHome(loggedUser) {
+templ Bookmarks(homeData layouts_view.StaticHomeData) {
+	@layouts_view.StaticHome(homeData) {
 		<h1 id="videos" class="text-3xl font-semibold">
 			Bookmarks
 		</h1>

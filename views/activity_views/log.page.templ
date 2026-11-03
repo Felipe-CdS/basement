@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-templ Log(calendarLog []models.ActivityDayOverview, partialLog templ.Component, stats models.StatsOverview, loggedUser bool) {
-	@layouts_view.StaticHome(loggedUser) {
+templ Log(calendarLog []models.ActivityDayOverview, partialLog templ.Component, stats models.StatsOverview, homeData layouts_view.StaticHomeData) {
+	@layouts_view.StaticHome(homeData) {
 		<h1 class="text-3xl font-semibold text-center">
 			/ Habits Log / 
 		</h1>

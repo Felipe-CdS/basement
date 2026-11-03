@@ -10,6 +10,7 @@ import (
 	"github.com/a-h/templ"
 	"nugu.dev/basement/pkg/models"
 	"nugu.dev/basement/views/activity_views"
+	layouts_view "nugu.dev/basement/views/layouts"
 )
 
 func (app *application) Activities(w http.ResponseWriter, r *http.Request) {
@@ -185,7 +186,14 @@ func (app *application) GetDailyLog(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	page := activity_views.Log(calendarLog, partialLog, calendarStats, loggedUser)
+	homeData := &layouts_view.StaticHomeData{
+		LoggedUser:   loggedUser,
+		BuildVersion: app.GitTag,
+		BuildTime:    app.BuildTime,
+		GitSHA:       app.GitShortSHA,
+	}
+
+	page := activity_views.Log(calendarLog, partialLog, calendarStats, *homeData)
 	page.Render(r.Context(), w)
 }
 

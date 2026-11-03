@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	layouts_view "nugu.dev/basement/views/layouts"
 	secrets_view "nugu.dev/basement/views/secrets"
 	"nugu.dev/basement/views/static_views"
 )
@@ -48,7 +49,6 @@ func (a *application) routes() *http.ServeMux {
 	})
 
 	mux.HandleFunc("/log/create", func(w http.ResponseWriter, r *http.Request) {
-
 		if err := a.AuthMiddleware(w, r); err != nil {
 			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 			return
@@ -74,22 +74,46 @@ func (a *application) routes() *http.ServeMux {
 	})
 
 	mux.HandleFunc("/reads", func(w http.ResponseWriter, r *http.Request) {
-		component := static_views.Reads(a.isLoggedUser(r))
+		component := static_views.Reads(
+			layouts_view.StaticHomeData{
+				LoggedUser:   a.isLoggedUser(r),
+				BuildVersion: a.GitTag,
+				BuildTime:    a.BuildTime,
+				GitSHA:       a.GitShortSHA,
+			})
 		component.Render(r.Context(), w)
 	})
 
 	mux.HandleFunc("/bookmarks", func(w http.ResponseWriter, r *http.Request) {
-		component := static_views.Bookmarks(a.isLoggedUser(r))
+		component := static_views.Bookmarks(
+			layouts_view.StaticHomeData{
+				LoggedUser:   a.isLoggedUser(r),
+				BuildVersion: a.GitTag,
+				BuildTime:    a.BuildTime,
+				GitSHA:       a.GitShortSHA,
+			})
 		component.Render(r.Context(), w)
 	})
 
 	mux.HandleFunc("/birthdays", func(w http.ResponseWriter, r *http.Request) {
-		component := static_views.Birthdays(a.isLoggedUser(r))
+		component := static_views.Birthdays(
+			layouts_view.StaticHomeData{
+				LoggedUser:   a.isLoggedUser(r),
+				BuildVersion: a.GitTag,
+				BuildTime:    a.BuildTime,
+				GitSHA:       a.GitShortSHA,
+			})
 		component.Render(r.Context(), w)
 	})
 
 	mux.HandleFunc("/secrets", func(w http.ResponseWriter, r *http.Request) {
-		component := secrets_view.Secrets(a.isLoggedUser(r))
+		component := secrets_view.Secrets(
+			layouts_view.StaticHomeData{
+				LoggedUser:   a.isLoggedUser(r),
+				BuildVersion: a.GitTag,
+				BuildTime:    a.BuildTime,
+				GitSHA:       a.GitShortSHA,
+			})
 		component.Render(r.Context(), w)
 	})
 

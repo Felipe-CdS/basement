@@ -45,7 +45,13 @@ func (app *application) Landing(w http.ResponseWriter, r *http.Request) {
 	// 	log.Fatalln(err)
 	// }
 
-	component := layouts_view.StaticHome(app.isLoggedUser(r))
+	component := layouts_view.StaticHome(
+		layouts_view.StaticHomeData{
+			LoggedUser:   app.isLoggedUser(r),
+			BuildVersion: app.GitTag,
+			BuildTime:    app.BuildTime,
+			GitSHA:       app.GitShortSHA,
+		})
 	component.Render(r.Context(), w)
 }
 

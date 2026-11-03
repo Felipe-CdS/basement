@@ -2,8 +2,8 @@ package static_views
 
 import layouts_view "nugu.dev/basement/views/layouts"
 
-templ Reads(loggedUser bool) {
-	@layouts_view.StaticHome(loggedUser) {
+templ Reads(homeData layouts_view.StaticHomeData) {
+	@layouts_view.StaticHome(homeData) {
 		<h1 class="text-3xl font-semibold">
 			Papers / Articles / Books
 		</h1>

@@ -31,6 +31,10 @@ services:
     profiles: [hot]
     container_name: basement-container
     image: cosmtrek/air
+    environment:
+      - GIT_TAG=${GIT_TAG}
+      - GIT_SHA=${GIT_SHA}
+      - BUILD_TIME=${BUILD_TIME}
     working_dir: /app
     ports:
       - 3000:3000

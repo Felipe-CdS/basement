@@ -5,7 +5,7 @@ tmp_dir = "tmp"
 [build]
   args_bin = []
   entrypoint = "./tmp/main"
-  cmd = "go build -o ./tmp/main ./cmd/"
+  cmd = "go build -ldflags=\"-X main.GitShortSHA=${GIT_SHA} -X main.BuildTime=${BUILD_TIME} -X main.GitTag=${GIT_TAG}\" -o ./tmp/main ./cmd/"
   delay = 1000
   exclude_dir = ["assets", "tmp", ".git"]
   exclude_file = []

@@ -34,8 +34,11 @@ RUN go mod verify
 
 ARG TARGETOS
 ARG TARGETARCH
+ARG GIT_SHA
+ARG GIT_TAG
+ARG BUILD_TIME
 
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=mod -ldflags "-w -s" -o ./tmp/basement ./cmd/
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=mod -ldflags "-w -s -X main.GitShortSHA=${GIT_SHA} -X main.BuildTime=${BUILD_TIME} -X main.GitTag=${GIT_TAG}" -o ./tmp/basement ./cmd/
 
 # =============================================================================
 # FINAL-IMAGE
