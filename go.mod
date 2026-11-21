@@ -1,11 +1,13 @@
 module nugu.dev/basement
 
-go 1.25.0
+go 1.27.0
 
 require (
 	github.com/a-h/templ v0.3.1020
 	github.com/joho/godotenv v1.5.1
 	github.com/lib/pq v1.10.9
+	github.com/oasdiff/yaml3 v0.0.16
+	gopkg.in/yaml.v3 v3.0.1
 	turso.tech/database/tursogo v0.7.1
 )
 

@@ -1,8 +1,10 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
+	"nugu.dev/basement/pkg/models"
 	layouts_view "nugu.dev/basement/views/layouts"
 	secrets_view "nugu.dev/basement/views/secrets"
 	"nugu.dev/basement/views/static_views"
@@ -114,6 +116,25 @@ func (a *application) routes() *http.ServeMux {
 				BuildTime:    a.BuildTime,
 				GitSHA:       a.GitShortSHA,
 			})
+		component.Render(r.Context(), w)
+	})
+
+	mux.HandleFunc("/changelog", func(w http.ResponseWriter, r *http.Request) {
+		var changelog, err = ReadChangelogFile()
+
+		if err != nil {
+			changelog = &models.Changelog{}
+			log.Println(err)
+		}
+
+		component := static_views.Changelog(
+			layouts_view.StaticHomeData{
+				LoggedUser:   a.isLoggedUser(r),
+				BuildVersion: a.GitTag,
+				BuildTime:    a.BuildTime,
+				GitSHA:       a.GitShortSHA,
+			},
+			changelog)
 		component.Render(r.Context(), w)
 	})
 

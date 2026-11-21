@@ -1,0 +1,18 @@
+entries:
+  - version: "0.0.3"
+    type: feature
+    date: "20/11/2026"
+    message: >
+      Changelog page and entries added.
+
+  - version: "0.0.2"
+    type: feature
+    date: "03/11/2026"
+    message: >
+      Footer added. Version, commit and last updated date are now visible in every page.
+
+  - version: "0.0.1"
+    type: init
+    date: "??/??/????"
+    message: >
+      Basement already existed before this, so this version is just a starting point. 

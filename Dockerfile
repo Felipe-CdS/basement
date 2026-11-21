@@ -23,7 +23,7 @@ RUN tailwindcss -i ./assets/css/tailwind_input.css -o ./assets/css/tailwind_styl
 # =============================================================================
 # PROD-BUILD
 
-FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS build-stage
+FROM --platform=$BUILDPLATFORM golang:1.27-alpine AS build-stage
 
 WORKDIR /app
 COPY --from=tailwind-generate-stage /app .
@@ -53,6 +53,7 @@ RUN mkdir /assets
 COPY --from=tailwind-generate-stage /app/assets ./assets/
 COPY --from=build-stage /app/tmp/basement .
 COPY --from=build-stage /app/tokens .
+COPY --from=build-stage /app/changelog.yaml .
 
 # TURSO NEEDS: libgcc gcompat
 RUN apk --no-cache add ca-certificates libgcc gcompat

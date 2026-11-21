@@ -1,0 +1,32 @@
+package static_views
+
+import (
+	"nugu.dev/basement/pkg/models"
+
+	layouts_view "nugu.dev/basement/views/layouts"
+)
+
+templ Changelog(homeData layouts_view.StaticHomeData, changelog *models.Changelog) {
+	@layouts_view.StaticHome(homeData) {
+		<h1 class="text-xl font-semibold text-center lg:text-3xl">
+			/ Changelog /
+		</h1>
+		<p class="text-center" id="display">
+			십 년이면 강산도 변한다...
+		</p>
+		for _, x := range changelog.Entries {
+			<table class="self-center mt-5 w-full border-gray-100 table-fixed lg:w-9/12">
+				<caption class="py-1 text-center text-black bg-gray-100">
+					{ x.Version } ({ x.EntryType }) 
+				</caption>
+				<tr class="border border-x-0 border-b-gray-50">
+					<td class="py-3 border-none">
+						<span class="text-left w-full">
+							{ x.EntryDate } | { x.Message }
+						</span>
+					</td>
+				</tr>
+			</table>
+		}
+	}
+}

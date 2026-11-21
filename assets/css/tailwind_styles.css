@@ -25,8 +25,6 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
-    --text-xs: 0.75rem;
-    --text-xs--line-height: calc(1 / 0.75);
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
     --text-lg: 1.125rem;
@@ -50,7 +48,6 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
-    --font-kr: "Noto Serif KR", sans-serif;
   }
 }
 @layer base {
@@ -250,14 +247,8 @@
   .mt-3 {
     margin-top: calc(var(--spacing) * 3);
   }
-  .mt-4 {
-    margin-top: calc(var(--spacing) * 4);
-  }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
-  }
-  .mt-6 {
-    margin-top: calc(var(--spacing) * 6);
   }
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
@@ -288,15 +279,6 @@
   }
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
-  }
-  .mb-10 {
-    margin-bottom: calc(var(--spacing) * 10);
-  }
-  .mb-12 {
-    margin-bottom: calc(var(--spacing) * 12);
-  }
-  .mb-16 {
-    margin-bottom: calc(var(--spacing) * 16);
   }
   .flex {
     display: flex;
@@ -658,9 +640,6 @@
   .indent-10 {
     text-indent: calc(var(--spacing) * 10);
   }
-  .font-kr {
-    font-family: var(--font-kr);
-  }
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -688,10 +667,6 @@
   .text-xl {
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
-  }
-  .text-xs {
-    font-size: var(--text-xs);
-    line-height: var(--tw-leading, var(--text-xs--line-height));
   }
   .leading-\[\.9rem\] {
     --tw-leading: .9rem;
@@ -793,9 +768,6 @@
     .lg\:w-9\/12 {
       width: calc(9 / 12 * 100%);
     }
-    .lg\:w-10\/12 {
-      width: calc(10 / 12 * 100%);
-    }
     .lg\:px-8 {
       padding-inline: calc(var(--spacing) * 8);
     }
@@ -808,9 +780,6 @@
     }
   }
   @media (width >= 80rem) {
-    .xl\:w-6\/12 {
-      width: calc(6 / 12 * 100%);
-    }
     .xl\:w-8\/12 {
       width: calc(8 / 12 * 100%);
     }

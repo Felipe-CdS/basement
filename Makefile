@@ -22,5 +22,5 @@ run:
 
 .PHONY: dev
 dev:
-	GIT_TAG=$(GIT_TAG) GIT_SHA=$(GIT_SHA) BUILD_TIME=$(BUILD_TIME) docker compose --profile hot up -d 
+	GIT_TAG=$(GIT_TAG) GIT_SHA=$(GIT_SHA) BUILD_TIME=$(BUILD_TIME) docker compose up -d 
 	docker logs -f basement-container

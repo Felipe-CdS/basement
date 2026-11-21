@@ -1,9 +1,14 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	"gopkg.in/yaml.v3"
+	"nugu.dev/basement/pkg/models"
 )
 
 /* Postgres can return duration from AGE() method. This return has []uint8 type.
@@ -74,4 +79,20 @@ func From24ClockToTime(date string, hourMinTime string) (time.Time, error) {
 	dateTime = dateTime.Add(time.Minute * time.Duration(entryMinutes))
 
 	return dateTime, nil
+}
+
+func ReadChangelogFile() (*models.Changelog, error) {
+	var c *models.Changelog
+
+	f, err := os.ReadFile("changelog.yaml")
+
+	if err != nil {
+		return nil, fmt.Errorf("Error reading changelog file")
+	}
+
+	if err := yaml.Unmarshal(f, &c); err != nil {
+		return nil, fmt.Errorf("Error reading changelog file")
+	}
+
+	return c, nil
 }

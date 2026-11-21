@@ -1,6 +1,5 @@
 services:
   templ:
-    profiles: [hot]
     container_name: templ-container
     image: ghcr.io/a-h/templ:v0.3.1020
     working_dir: /app
@@ -14,7 +13,6 @@ services:
           memory: 32M
 
   tailwind:
-    profiles: [hot]
     container_name: tailwind-container
     image: coutito/tailwindcss:v4.3.3
     volumes:
@@ -25,12 +23,11 @@ services:
       resources:
         limits:
           cpus: '0.1'
-          memory: 64M
+          memory: 32M
 
-  hot:
-    profiles: [hot]
+  basement:
     container_name: basement-container
-    image: cosmtrek/air
+    image: cosmtrek/air:latest
     environment:
       - GIT_TAG=${GIT_TAG}
       - GIT_SHA=${GIT_SHA}
